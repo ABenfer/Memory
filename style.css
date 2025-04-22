@@ -7,7 +7,7 @@ body {
   padding: 2.5rem 2rem;
   padding-top: 1rem;
   background: linear-gradient(135deg, #fff 10%, #ddd 100%);
-  background-image: url('/background3.png');
+  background-image: url('background3.png');
   border-radius: 1.5rem;
   /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12); */
   line-height: 1.7;
