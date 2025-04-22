@@ -228,3 +228,17 @@
   // Set initial state after DOM is loaded
   setTimeout(updateToggleLabels, 0);
 })();
+
+// iOS keyboard fix: add/remove .keyboard-open on bottom bar when input is focused
+(function() {
+  var mainInput = document.getElementById('main-input');
+  var bottomBar = document.querySelector('.bottom-bar');
+  if (mainInput && bottomBar) {
+    mainInput.addEventListener('focus', function() {
+      bottomBar.classList.add('keyboard-open');
+    });
+    mainInput.addEventListener('blur', function() {
+      bottomBar.classList.remove('keyboard-open');
+    });
+  }
+})();
