@@ -210,4 +210,21 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeSidebarFn();
   });
+
+  // ---------- TOGGLE LABELS HANDLING -------------
+  function updateToggleLabels() {
+    const modeToggle = document.getElementById("mode-toggle");
+    const storeLabel = document.getElementById("store-label");
+    const askLabel = document.getElementById("ask-label");
+    if (modeToggle.checked) {
+      storeLabel.classList.remove("active");
+      askLabel.classList.add("active");
+    } else {
+      storeLabel.classList.add("active");
+      askLabel.classList.remove("active");
+    }
+  }
+  document.getElementById("mode-toggle").addEventListener("change", updateToggleLabels);
+  // Set initial state after DOM is loaded
+  setTimeout(updateToggleLabels, 0);
 })();
