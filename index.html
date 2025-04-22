@@ -7,14 +7,9 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>🧠 Memory Assistant v0.2</h1>
+  <h1>🧠 Memory Assistant v0.2.1</h1>
 
   <section id="main-input-section">
-    <input type="text" id="main-input" placeholder="Type a memory or a question..." />
-    <div style="display:flex; gap:1rem; margin-top:0.7rem;">
-      <button id="store-btn">Store</button>
-      <button id="ask-btn">Ask</button>
-    </div>
     <div id="answer" class="answer" style="display:none;"></div>
     <div id="relevant-section" class="relevant" style="display:none;"></div>
   </section>
@@ -32,7 +27,7 @@
   
   <!-- <hr /> -->
 
-  <details id="apikey-details" open>
+  <details id="apikey-details" closed>
     <summary>API Key</summary>
     <section id="apikey-section">
       <label for="apikey">OpenAI API key:</label>
@@ -41,6 +36,20 @@
       <button id="delete-key" class="danger">Delete API key</button>
     </section>
   </details>
+
+  <!-- Fixed bottom bar for input and mode toggle -->
+  <div class="bottom-bar">
+    <input type="text" id="main-input" placeholder="Type a memory or a question..." />
+    <label class="toggle-switch">
+      <input type="checkbox" id="mode-toggle">
+      <span class="slider"></span>
+      <span class="toggle-labels">
+        <span id="store-label">Store</span>
+        <span id="ask-label">Ask</span>
+      </span>
+    </label>
+    <button id="submit-btn">Go</button>
+  </div>
 
   <script src="script.js"></script>
 </body>

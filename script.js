@@ -64,44 +64,56 @@
     catch(e){console.error(e);/*silently fail so UX isn't blocked*/}
   }
 
-  // ---------- STORE MEMORY (from main input) -------------
-  document.getElementById("store-btn").onclick=()=>{
-    const text=document.getElementById("main-input").value.trim();
-    if(!text) return;
-    const onSuccess=coords=>{
-      const mem={text,date:new Date().toISOString(),location:coords?{lat:coords.latitude,lon:coords.longitude}:null};
-      const mems=loadMemories();mems.push(mem);saveMemories(mems);renderMemories(mems);
-      document.getElementById("main-input").value="";
-      updateConsolidated(mem.text);
-    };
-    if(navigator.geolocation){navigator.geolocation.getCurrentPosition(p=>onSuccess(p.coords),()=>onSuccess(null),{maximumAge:6e4,timeout:5e3});}else onSuccess(null);
-  };
-
-  // ---------- ASK QUESTION (from main input) -------------
-  document.getElementById("ask-btn").onclick=async()=>{
-    const q=document.getElementById("main-input").value.trim();
-    if(!q) return;
-    const key=(document.getElementById("apikey").value.trim()||localStorage.getItem(apiKeyKey)||"").trim();if(!key){alert("Please provide your OpenAI API key first.");return;}
-    const ansBox=document.getElementById("answer");ansBox.style.display="block";ansBox.textContent="Thinking...";document.getElementById("relevant-section").style.display="none";
-    const mems=loadMemories();const qWords=q.toLowerCase().split(/\s+/);
-    let rel=mems.filter(m=>qWords.some(w=>m.text.toLowerCase().includes(w)));if(!rel.length) rel=mems.slice(-10);rel=rel.slice(-20);
-    const prompt=`Below are some of the user's stored memories, each prefixed with an index and timestamp.\nUse them to answer the user's question.\n\nMEMORIES:\n${rel.map((m,i)=>`${i+1}. (${m.date}) ${m.text}`).join("\n")}\n\nQUESTION: ${q}\n\nAnswer by referencing the relevant memories.`;
-    try{
-      const r=await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${key}`},body:JSON.stringify({model:"gpt-4.1-mini",messages:[{role:"system",content:"You are a helpful memory assistant."},{role:"user",content:prompt}],temperature:0.3})});
-      if(!r.ok) throw new Error(`OpenAI error: ${r.status}`);const data=await r.json();ansBox.textContent=data.choices?.[0]?.message?.content?.trim()||"(No answer)";showRelevant(rel);
-    }catch(e){console.error(e);ansBox.textContent=`Error: ${e.message}`;}
-  };
-
-  // ---------- ENTER KEY HANDLING -------------
+  // ---------- STORE/ASK MODE HANDLING -------------
+  // Remove old button event listeners and use the new toggle/button
+  const submitBtn = document.getElementById("submit-btn");
+  const modeToggle = document.getElementById("mode-toggle");
   const mainInput = document.getElementById("main-input");
-  mainInput.addEventListener("keydown", function(e) {
+
+  // Remove old buttons if they exist (for safety)
+  const oldStoreBtn = document.getElementById("store-btn");
+  if (oldStoreBtn) oldStoreBtn.remove();
+  const oldAskBtn = document.getElementById("ask-btn");
+  if (oldAskBtn) oldAskBtn.remove();
+
+  // Unified submit handler
+  submitBtn.onclick = async () => {
+    const text = mainInput.value.trim();
+    if (!text) return;
+    if (!modeToggle.checked) {
+      // Store mode
+      const onSuccess = coords => {
+        const mem = { text, date: new Date().toISOString(), location: coords ? { lat: coords.latitude, lon: coords.longitude } : null };
+        const mems = loadMemories(); mems.push(mem); saveMemories(mems); renderMemories(mems);
+        mainInput.value = "";
+        updateConsolidated(mem.text);
+      };
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(p => onSuccess(p.coords), () => onSuccess(null), { maximumAge: 6e4, timeout: 5e3 });
+      } else onSuccess(null);
+    } else {
+      // Ask mode
+      const key = (document.getElementById("apikey").value.trim() || localStorage.getItem(apiKeyKey) || "").trim();
+      if (!key) { alert("Please provide your OpenAI API key first."); return; }
+      const ansBox = document.getElementById("answer"); ansBox.style.display = "block"; ansBox.textContent = "Thinking..."; document.getElementById("relevant-section").style.display = "none";
+      const mems = loadMemories(); const qWords = text.toLowerCase().split(/\s+/);
+      let rel = mems.filter(m => qWords.some(w => m.text.toLowerCase().includes(w))); if (!rel.length) rel = mems.slice(-10); rel = rel.slice(-20);
+      const prompt = `Below are some of the user's stored memories, each prefixed with an index and timestamp.\nUse them to answer the user's question.\n\nMEMORIES:\n${rel.map((m, i) => `${i + 1}. (${m.date}) ${m.text}`).join("\n")}\n\nQUESTION: ${text}\n\nAnswer by referencing the relevant memories.`;
+      try {
+        const r = await fetch("https://api.openai.com/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` }, body: JSON.stringify({ model: "gpt-4.1-mini", messages: [{ role: "system", content: "You are a helpful memory assistant." }, { role: "user", content: prompt }], temperature: 0.3 }) });
+        if (!r.ok) throw new Error(`OpenAI error: ${r.status}`); const data = await r.json(); ansBox.textContent = data.choices?.[0]?.message?.content?.trim() || "(No answer)"; showRelevant(rel);
+      } catch (e) { console.error(e); ansBox.textContent = `Error: ${e.message}`; }
+    }
+  };
+
+  // ENTER KEY HANDLING (Ctrl/Cmd+Enter always asks, Enter uses current mode)
+  mainInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       if (e.ctrlKey || e.metaKey) {
-        document.getElementById("ask-btn").click();
-      } else {
-        document.getElementById("store-btn").click();
+        modeToggle.checked = true; // force ask mode
       }
+      submitBtn.click();
     }
   });
 
