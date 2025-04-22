@@ -75,7 +75,7 @@ textarea, input[type=text], input[type=password] {
   transition: border 0.2s;
 }
 textarea:focus, input[type=password]:focus {
-  border: 1.5px solid #6366f1;
+  border: 1.5px solid #111;
   outline: none;
   background: #fff;
 }
@@ -87,7 +87,7 @@ button {
   border: none;
   border-radius: .75rem;
   cursor: pointer;
-  background: linear-gradient(90deg, #6366f1 0%, #2563eb 100%);
+  background: linear-gradient(90deg, #111 0%, #444 100%);
   color: #fff;
   font-weight: 700;
   font-size: 1.08rem;
@@ -95,7 +95,7 @@ button {
   transition: background 0.2s, transform 0.1s;
 }
 button:hover:not(:disabled) {
-  background: linear-gradient(90deg, #2563eb 0%, #6366f1 100%);
+  background: linear-gradient(90deg, #111 0%, #444 100%);
   transform: translateY(-2px) scale(1.03);
 }
 button.danger {
@@ -180,6 +180,16 @@ details summary {
   font-size: 0.92em;
   color: #ccc;
   margin-left: 0.3em;
+}
+
+.memory-day-group {
+  margin-top: 1.2em;
+}
+.memory-day-label {
+  font-size: 1.05em;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 0.3em;
 }
 
 .answer {
@@ -324,7 +334,7 @@ li {
   position: relative;
   width: 48px;
   height: 28px;
-  background: #e0e7ff;
+  background: #aaa;
   border-radius: 16px;
   margin: 0 0.5rem;
   transition: background 0.2s;
@@ -337,29 +347,29 @@ li {
   top: 4px;
   width: 20px;
   height: 20px;
-  background: #6366f1;
+  background: #111;
   border-radius: 50%;
   transition: transform 0.2s;
 }
 .toggle-switch input:checked + .slider:before {
   transform: translateX(20px);
-  background: #2563eb;
+  background: #333;
 }
 .toggle-switch input:checked + .slider {
-  background: #c7d2fe;
+  background: #aaa;
 }
 .toggle-labels {
   display: flex;
   flex-direction: row;
   gap: 0.3rem;
   font-size: 0.98rem;
-  color: #6366f1;
+  color: #111;
   font-weight: 600;
 }
 .toggle-label {
   font-size: 1.05rem;
   font-weight: 600;
-  color: #6366f1;
+  color: #111;
   display: flex;
   align-items: center;
   gap: 0.3rem;
