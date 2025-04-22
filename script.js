@@ -43,6 +43,11 @@
   renderMemories(loadMemories());
   renderSummary(loadSummary());
 
+  // Hide placeholder if answer is shown (on page load)
+  if (document.getElementById("answer").textContent.trim()) {
+    document.getElementById("placeholder").style.display = "none";
+  }
+
   // ---------- SAVE API KEY --------------------
   document.getElementById("save-key").onclick=()=>{
     const k=document.getElementById("apikey").value.trim();if(!k){alert("Please enter a valid API key.");return;}localStorage.setItem(apiKeyKey,k);alert("Key saved ✅");};
@@ -80,6 +85,8 @@
   submitBtn.onclick = async () => {
     const text = mainInput.value.trim();
     if (!text) return;
+    // Hide placeholder when submitting
+    document.getElementById("placeholder").style.display = "none";
     if (!modeToggle.checked) {
       // Store mode
       const onSuccess = coords => {
