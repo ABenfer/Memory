@@ -7,19 +7,10 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>🧠 Memory Assistant v0.1</h1>
-
-  <section id="apikey-section">
-    <label for="apikey">OpenAI API key:</label>
-    <input type="password" id="apikey" placeholder="sk-..." />
-    <button id="save-key">Save key</button>
-  </section>
-
-  <hr />
+  <h1>🧠 Memory Assistant v0.1.1</h1>
 
   <section id="remember-section">
     <h2>Store a memory</h2>
-    <label for="memory-input">What should I remember?</label>
     <textarea id="memory-input" placeholder="e.g. Buy Martin an espresso glass"></textarea>
     <button id="remember-btn">Remember this</button>
   </section>
@@ -28,7 +19,6 @@
 
   <section id="ask-section">
     <h2>Ask your memory</h2>
-    <label for="question-input">Question</label>
     <input type="text" id="question-input" placeholder="e.g. Any gift ideas for Martin?" />
     <button id="ask-btn">Ask</button>
     <div id="answer" class="answer" style="display:none;"></div>
@@ -46,6 +36,18 @@
     <summary>All stored memories</summary>
     <div id="memories" style="margin-top:0.75rem;"></div>
     <button id="clear-btn" class="danger">Delete stored data</button>
+  </details>
+  
+  <hr />
+
+  <details id="apikey-details" open>
+    <summary>API Key</summary>
+    <section id="apikey-section">
+      <label for="apikey">OpenAI API key:</label>
+      <input type="password" id="apikey" placeholder="sk-..." />
+      <button id="save-key">Save key</button>
+      <button id="delete-key" class="danger">Delete API key</button>
+    </section>
   </details>
 
   <script src="script.js"></script>

@@ -61,14 +61,34 @@
     };
     if(navigator.geolocation){navigator.geolocation.getCurrentPosition(p=>onSuccess(p.coords),()=>onSuccess(null),{maximumAge:6e4,timeout:5e3});}else onSuccess(null);
   };
+  // Add Enter key support for memory input
+  const memoryInput = document.getElementById("memory-input");
+  memoryInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      document.getElementById("remember-btn").click();
+    }
+  });
 
   // ---------- CLEAR ALL STORAGE ---------------
   document.getElementById("clear-btn").onclick=()=>{
-    if(confirm("Delete ALL stored data (memories, summary & key)?")){
-      localStorage.clear();renderMemories([]);renderSummary("");document.getElementById("apikey").value="";
+    if(confirm("Delete ALL stored data (memories, summary)? This will NOT delete your API key.")){
+      localStorage.removeItem(memoriesKey);
+      localStorage.removeItem(summaryKey);
+      renderMemories([]);renderSummary("");
       const ans=document.getElementById("answer");ans.style.display="none";ans.textContent="";
       const rel=document.getElementById("relevant-section");rel.style.display="none";rel.textContent="";
-      alert("All local data deleted.");}
+      alert("All memories and summary deleted. API key is retained.");
+    }
+  };
+
+  // ---------- DELETE API KEY ONLY -------------
+  document.getElementById("delete-key").onclick=()=>{
+    if(confirm("Delete your stored API key?")){
+      localStorage.removeItem(apiKeyKey);
+      document.getElementById("apikey").value="";
+      alert("API key deleted.");
+    }
   };
 
   // ---------- SHOW RELEVANT -------------------
@@ -89,4 +109,12 @@
       if(!r.ok) throw new Error(`OpenAI error: ${r.status}`);const data=await r.json();ansBox.textContent=data.choices?.[0]?.message?.content?.trim()||"(No answer)";showRelevant(rel);
     }catch(e){console.error(e);ansBox.textContent=`Error: ${e.message}`;}
   };
+  // Add Enter key support for ask input
+  const questionInput = document.getElementById("question-input");
+  questionInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      document.getElementById("ask-btn").click();
+    }
+  });
 })();
