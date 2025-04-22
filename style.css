@@ -170,7 +170,7 @@ details summary {
 .memory-text {
   flex: 1 1 auto;
   word-break: break-word;
-  color:white;
+  color:black;
 }
 .memory-meta {
   font-size: 0.92em;
@@ -194,11 +194,14 @@ details summary {
 
   border-left: 5px solid #aaa;
   border-right: 5px solid #aaa;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
   padding: 1.2rem 1.5rem;
   margin-top: 1.2rem;
   border-radius: .75rem;
   font-size: 1.05rem;
-  color: #aaa;
+  color: #ddd;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 summary {
@@ -423,7 +426,7 @@ li {
   top: 1.2rem;
   left: 1.2rem;
   z-index: 201;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0);
   border: none;
   border-radius: 0.7em;
   font-size: 2rem;
@@ -433,7 +436,7 @@ li {
   transition: background 0.2s;
 }
 .menu-btn:hover {
-  background: #e0e7ff;
+  background: #ccc;
 }
 
 .sidebar-overlay {

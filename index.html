@@ -8,24 +8,24 @@
 </head>
 <body>
   <h1>Memory Assistant</h1>
-  <p class="subtitle">v0.2.8</p>
+  <p class="subtitle">v0.3</p>
 
   <section id="main-input-section">
     <div id="answer" class="answer" style="display:none;"></div>
     <div id="relevant-section" class="relevant" style="display:none;"></div>
     <div id="placeholder" class="placeholder">
-      <div class="placeholder-icon">🧠</div>
+      <div class="placeholder-icon">🖋</div>
       <div class="placeholder-text">Your memories and answers will appear here</div>
     </div>
   </section>
 
-  <hr />
 
   <!-- Menu button and sidebar -->
   <button id="menu-btn" class="menu-btn" aria-label="Open menu">☰</button>
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
   <aside id="sidebar" class="sidebar">
     <button id="close-sidebar" class="close-sidebar" aria-label="Close menu">×</button>
+    <br/><br/>
     <details id="summary-section" closed>
       <summary>Consolidated memory summary</summary>
       <div id="summary" style="margin-top:0.75rem;"></div>
@@ -50,14 +50,14 @@
   <div class="bottom-bar">
     <div class="bar-controls">
       <span id="store-label" class="toggle-label">
-        <span class="icon">💾</span> Store
+        <span class="icon">🖫</span> Store
       </span>
       <label class="toggle-switch">
-        <input type="checkbox" id="mode-toggle">
+        <input type="checkbox" id="mode-toggle" checked>
         <span class="slider"></span>
       </label>
       <span id="ask-label" class="toggle-label">
-        <span class="icon">❓</span> Ask
+        <span class="icon">🗩</span> Ask
       </span>
       <button id="submit-btn">Go</button>
     </div>
