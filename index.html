@@ -9,23 +9,15 @@
 <body>
   <h1>🧠 Memory Assistant v0.1.1</h1>
 
-  <section id="remember-section">
-    <h2>Store a memory</h2>
-    <textarea id="memory-input" placeholder="e.g. Buy Martin an espresso glass"></textarea>
-    <button id="remember-btn">Remember this</button>
-  </section>
-
-  <hr />
-
-  <section id="ask-section">
-    <h2>Ask your memory</h2>
-    <input type="text" id="question-input" placeholder="e.g. Any gift ideas for Martin?" />
-    <button id="ask-btn">Ask</button>
+  <section id="main-input-section">
+    <input type="text" id="main-input" placeholder="Type a memory or a question..." />
+    <div style="display:flex; gap:1rem; margin-top:0.7rem;">
+      <button id="store-btn">Store</button>
+      <button id="ask-btn">Ask</button>
+    </div>
     <div id="answer" class="answer" style="display:none;"></div>
     <div id="relevant-section" class="relevant" style="display:none;"></div>
   </section>
-
-  <hr />
 
   <details id="summary-section" closed>
     <summary>Consolidated memory summary</summary>
@@ -38,7 +30,7 @@
     <button id="clear-btn" class="danger">Delete stored data</button>
   </details>
   
-  <hr />
+  <!-- <hr /> -->
 
   <details id="apikey-details" open>
     <summary>API Key</summary>
