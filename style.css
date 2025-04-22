@@ -484,28 +484,12 @@ li {
 
 @media (max-width: 700px) {
   .bottom-bar {
-    max-width: 100vw;
-    padding: 0.5rem 0;
-  }
-  .bar-controls {
-    max-width: 100vw;
-    gap: 0.7rem;
-  }
-  .bottom-bar input[type="text"] {
-    max-width: 100vw;
-  }
-  .bottom-bar {
-    position: sticky;
-    bottom: 0;
-    /* fallback for iOS keyboard */
-  }
-  .bottom-bar.keyboard-open {
-    position: absolute;
-    bottom: 0;
+    position: fixed;
     left: 0;
     right: 0;
-    width: 100vw;
-    z-index: 1000;
+    bottom: 0;
+    max-width: 100vw;
+    padding: 0.5rem 0;
   }
 }
 
@@ -518,16 +502,16 @@ li {
 
 @media only screen and (max-device-width: 820px) and (orientation: portrait), 
        only screen and (max-device-width: 820px) and (orientation: landscape) {
-  /* Hide the bottom bar (search bar) on iOS web app */
-  body.apple-mobile-web-app .bottom-bar {
-    display: none !important;
-  }
-  /* Make input translucent on iPhone/iPad */
+  /* Remove all custom styling for the bottom bar input on iPhone/iPad */
   .bottom-bar input[type="text"] {
-    background: rgba(255,255,255,0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1.5px solid #e0e7ff;
-    color: #222;
+    background: initial !important;
+    border: initial !important;
+    color: initial !important;
+    box-shadow: initial !important;
+    padding: initial !important;
+    border-radius: initial !important;
+    font-style: initial !important;
+    font-size: initial !important;
+    width: 100%;
   }
 }
