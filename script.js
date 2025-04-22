@@ -186,4 +186,28 @@
       renderSummary(loadSummary());
     }
   };
+
+  // --- SIDEBAR MENU HANDLING ---
+  const menuBtn = document.getElementById("menu-btn");
+  const sidebar = document.getElementById("sidebar");
+  const sidebarOverlay = document.getElementById("sidebar-overlay");
+  const closeSidebar = document.getElementById("close-sidebar");
+
+  function openSidebar() {
+    sidebar.classList.add("open");
+    sidebarOverlay.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
+  function closeSidebarFn() {
+    sidebar.classList.remove("open");
+    sidebarOverlay.style.display = "none";
+    document.body.style.overflow = "";
+  }
+  menuBtn.onclick = openSidebar;
+  closeSidebar.onclick = closeSidebarFn;
+  sidebarOverlay.onclick = closeSidebarFn;
+  // Optional: close sidebar with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSidebarFn();
+  });
 })();

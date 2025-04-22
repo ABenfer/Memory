@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1>Memory Assistant</h1>
-  <p class="subtitle">v0.2.7</p>
+  <p class="subtitle">v0.2.8</p>
 
   <section id="main-input-section">
     <div id="answer" class="answer" style="display:none;"></div>
@@ -21,28 +21,30 @@
 
   <hr />
 
-  <details id="summary-section" closed>
-    <summary>Consolidated memory summary</summary>
-    <div id="summary" style="margin-top:0.75rem;"></div>
-  </details>
-
-  <details id="memories-section" closed>
-    <summary>All stored memories</summary>
-    <div id="memories" style="margin-top:0.75rem;"></div>
-    <button id="clear-btn" class="danger">Delete stored data</button>
-  </details>
-  
-  <!-- <hr /> -->
-
-  <details id="apikey-details" closed>
-    <summary>API Key</summary>
-    <section id="apikey-section">
-      <label for="apikey">OpenAI API key:</label>
-      <input type="password" id="apikey" placeholder="sk-..." />
-      <button id="save-key">Save key</button>
-      <button id="delete-key" class="danger">Delete API key</button>
-    </section>
-  </details>
+  <!-- Menu button and sidebar -->
+  <button id="menu-btn" class="menu-btn" aria-label="Open menu">☰</button>
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside id="sidebar" class="sidebar">
+    <button id="close-sidebar" class="close-sidebar" aria-label="Close menu">×</button>
+    <details id="summary-section" closed>
+      <summary>Consolidated memory summary</summary>
+      <div id="summary" style="margin-top:0.75rem;"></div>
+    </details>
+    <details id="memories-section" closed>
+      <summary>All stored memories</summary>
+      <div id="memories" style="margin-top:0.75rem;"></div>
+      <button id="clear-btn" class="danger">Delete stored data</button>
+    </details>
+    <details id="apikey-details" closed>
+      <summary>API Key</summary>
+      <section id="apikey-section">
+        <label for="apikey">OpenAI API key:</label>
+        <input type="password" id="apikey" placeholder="sk-..." />
+        <button id="save-key">Save key</button>
+        <button id="delete-key" class="danger">Delete API key</button>
+      </section>
+    </details>
+  </aside>
 
   <!-- Fixed bottom bar for input and mode toggle -->
   <div class="bottom-bar">
