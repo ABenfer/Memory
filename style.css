@@ -6,17 +6,19 @@ body {
   margin-top: 1rem;
   padding: 2.5rem 2rem;
   padding-top: 1rem;
-  background: linear-gradient(135deg, #fff 0%, #ddd 100%);
+  background: linear-gradient(135deg, #fff 10%, #ddd 100%);
+  background-image: url('/background3.png');
   border-radius: 1.5rem;
   /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12); */
   line-height: 1.7;
   padding-bottom: 5.5rem; /* space for bottom bar */
+  color:white;
 }
 
 h1 {
   font-size: 2rem;
   /* margin-bottom: 2rem; */
-  color: #1e293b;
+  color: white;
   letter-spacing: -1px;
   text-align: center;
   padding: 0;
@@ -27,7 +29,7 @@ h1 {
 .subtitle {
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
-  color: #1e293b;
+  color: white;
   letter-spacing: -0.5px;
   text-align: center;
   padding: 0;
@@ -37,7 +39,7 @@ h1 {
 h2 {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
-  color: #1e293b;
+  color: white; 
   letter-spacing: -0.5px;
   text-align: center;
   padding: 0;
@@ -114,8 +116,8 @@ details summary {
 .unfoldable-indicator {
   display: inline-block;
   font-size: 1em;
-  /* color: #6366f1; */
-  color: #555;
+  /* color: #ffffff; */
+  color: #ddd;
   transition: transform 0.2s;
   margin-right: 0.1em;
 }
@@ -137,6 +139,38 @@ details summary {
   box-shadow: 0 4px 16px 0 rgba(99, 102, 241, 0.10);
 }
 
+.memory-list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.2rem;
+  font-size: 0.98rem;
+}
+.memory-list-item .delete-memory-btn {
+  padding: 0.15em 0.45em;
+  font-size: 1em;
+  border-radius: 0.4em;
+  background: rgba(0,0,0,0);
+  color: #ef4444;
+  border: none;
+  cursor: pointer;
+  margin-left: 0.3em;
+  transition: background 0.15s;
+}
+.memory-list-item .delete-memory-btn:hover {
+  background: #fee2e2;
+}
+.memory-text {
+  flex: 1 1 auto;
+  word-break: break-word;
+  color:white;
+}
+.memory-meta {
+  font-size: 0.92em;
+  color: #ccc;
+  margin-left: 0.3em;
+}
+
 .answer {
   /* background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%); */
   /* border-left: 5px solid #38bdf8; */
@@ -145,23 +179,25 @@ details summary {
   /* white-space: pre-wrap; */
   border-radius: .75rem;
   font-size: 1.08rem;
-  color: #555;
+  color: #eee;
 }
 
 .relevant {
-  background: linear-gradient(90deg, #fefce8 0%, #fef9c3 100%);
-  border-left: 5px solid #facc15;
+  /* background: linear-gradient(90deg, #fefce8 0%, #fef9c3 100%); */
+
+  border-left: 5px solid #aaa;
+  border-right: 5px solid #aaa;
   padding: 1.2rem 1.5rem;
   margin-top: 1.2rem;
   border-radius: .75rem;
   font-size: 1.05rem;
-  color: #713f12;
+  color: #aaa;
 }
 
 summary {
   cursor: pointer;
   font-size: 1.18rem;
-  color: #555;
+  color: white;
   font-weight: 700;
   list-style: none;
   /* color: #3730a3; */
@@ -219,7 +255,7 @@ li {
   right: 0;
   bottom: 0;
   width: 100vw;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 -2px 16px 0 rgba(30,41,59,0.10);
   display: flex;
   flex-direction: column;

@@ -27,9 +27,9 @@
       const dayMems = grouped[day];
       const dayLabel = new Date(day).toLocaleDateString();
       c.innerHTML += `<div style='margin-top:1.2em;'><div style='font-size:1.05em;color:#6366f1;font-weight:600;margin-bottom:0.3em;'>${dayLabel}</div><ul class='memory-list'>`;
-      dayMems.forEach(m => {
+      dayMems.forEach((m, idx) => {
         let loc = m.location && m.location.lat != null ? ` (${m.location.lat.toFixed(2)}, ${m.location.lon.toFixed(2)})` : "";
-        c.innerHTML += `<li class='memory-list-item'><span class='memory-text'>${m.text}</span> <span class='memory-meta'>${new Date(m.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}${loc}</span></li>`;
+        c.innerHTML += `<li class='memory-list-item'><span class='memory-text'>${m.text}</span> <span class='memory-meta'>${new Date(m.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}${loc}</span> <button class='delete-memory-btn' data-date='${m.date}'>🗑️</button></li>`;
       });
       c.innerHTML += `</ul></div>`;
     });
@@ -166,4 +166,17 @@
   document.querySelectorAll('details').forEach(details => {
     details.addEventListener('toggle', updateUnfoldableIndicators);
   });
+
+  // Add event listener for deleting individual memories
+  document.getElementById("memories").onclick = function(e) {
+    if (e.target.classList.contains("delete-memory-btn")) {
+      const date = e.target.getAttribute("data-date");
+      let mems = loadMemories();
+      mems = mems.filter(m => m.date !== date);
+      saveMemories(mems);
+      renderMemories(mems);
+      // Optionally update summary
+      renderSummary(loadSummary());
+    }
+  };
 })();
