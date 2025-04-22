@@ -7,12 +7,16 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>🧠 Memory Assistant v0.2.1</h1>
+  <h1>🧠 Memory Assistant</h1>
+  <p class="subtitle">v0.2.2</p>
 
   <section id="main-input-section">
+    Just ask something or type a memory. The assistant will remember it for you.
     <div id="answer" class="answer" style="display:none;"></div>
     <div id="relevant-section" class="relevant" style="display:none;"></div>
   </section>
+
+  <hr />
 
   <details id="summary-section" closed>
     <summary>Consolidated memory summary</summary>
@@ -39,16 +43,20 @@
 
   <!-- Fixed bottom bar for input and mode toggle -->
   <div class="bottom-bar">
-    <input type="text" id="main-input" placeholder="Type a memory or a question..." />
-    <label class="toggle-switch">
-      <input type="checkbox" id="mode-toggle">
-      <span class="slider"></span>
-      <span class="toggle-labels">
-        <span id="store-label">Store</span>
-        <span id="ask-label">Ask</span>
+    <div class="bar-controls">
+      <span id="store-label" class="toggle-label">
+        <span class="icon">💾</span> Store
       </span>
-    </label>
-    <button id="submit-btn">Go</button>
+      <label class="toggle-switch">
+        <input type="checkbox" id="mode-toggle">
+        <span class="slider"></span>
+      </label>
+      <span id="ask-label" class="toggle-label">
+        <span class="icon">❓</span> Ask
+      </span>
+      <button id="submit-btn">Go</button>
+    </div>
+    <input type="text" id="main-input" placeholder="Type a memory or a question..." />
   </div>
 
   <script src="script.js"></script>
