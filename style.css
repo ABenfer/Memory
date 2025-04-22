@@ -502,3 +502,19 @@ li {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
+
+@media only screen and (max-device-width: 820px) and (orientation: portrait), 
+       only screen and (max-device-width: 820px) and (orientation: landscape) {
+  /* Hide the bottom bar (search bar) on iOS web app */
+  body.apple-mobile-web-app .bottom-bar {
+    display: none !important;
+  }
+  /* Make input translucent on iPhone/iPad */
+  .bottom-bar input[type="text"] {
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1.5px solid #e0e7ff;
+    color: #222;
+  }
+}
